@@ -1,11 +1,25 @@
 import Board from "./Board";
+import History from "./History";
+import { GameProvider } from "./GameContext";
 import "./App.css";
 
 function App() {
   return (
-    <div className="app-wrapper">
-      <Board />
-    </div>
+    <GameProvider>
+      <div className="app-wrapper">
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "100px",
+            width: "100%",
+          }}
+        >
+          <Board />
+          <History />
+        </div>
+      </div>
+    </GameProvider>
   );
 }
 

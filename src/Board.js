@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import POSITIONS from "./positions.json";
+import { useGames } from "./GameContext";
 import "./Board.css";
 
 // All rotation operations for any board state
@@ -81,8 +82,12 @@ const AllRotations = ({ board, setRotation }) => {
       <div className="rotation-wrap">
         <div className="title">ROTATIONS</div>
         <div className="all-rotations">
-          {rots.map((r) => (
-            <Rotation boardString={r} setRotation={setRotation} />
+          {rots.map((r, i) => (
+            <Rotation
+              key={`rotation-${i}`}
+              boardString={r}
+              setRotation={setRotation}
+            />
           ))}
         </div>
       </div>
@@ -101,6 +106,10 @@ const AllRotations = ({ board, setRotation }) => {
 const Board = () => {
   const [boardState, setBoardState] = useState({}); // current board state
   const [move, setMove] = useState(0); // move index
+  const [first, setFirst] = useState("green");
+  const { addGame } = useGames();
+  const blues = [0, 2, 6, 8];
+  const reds = [1, 3, 5, 7];
 
   // reset board
   const onReset = () => {
@@ -113,6 +122,15 @@ const Board = () => {
     // automatically keep track of turn
     let turn = move % 2 === 0 ? "o" : "x";
     if (!!!boardState[position]) {
+      if (move === 0) {
+        let firstColor = "green";
+        if (blues.includes(position)) {
+          firstColor = "blue";
+        } else if (reds.includes(position)) {
+          firstColor = "red";
+        }
+        setFirst(firstColor);
+      }
       setBoardState({ ...boardState, [position]: turn });
       setMove(move + 1);
     }
@@ -163,6 +181,23 @@ const Board = () => {
           <div className="board-rotations">
             <AllRotations board={boardState} setRotation={setRotation} />
           </div>
+        </div>
+        <div style={{ display: "flex", gap: "5px" }}>
+          <button
+            onClick={() => addGame({ status: "win", first_move_color: first })}
+          >
+            MENACE Wins
+          </button>
+          <button
+            onClick={() => addGame({ status: "draw", first_move_color: first })}
+          >
+            Draw
+          </button>
+          <button
+            onClick={() => addGame({ status: "loss", first_move_color: first })}
+          >
+            Human Wins
+          </button>
         </div>
       </div>
       {/* <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
