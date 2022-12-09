@@ -54,6 +54,7 @@ const Rotation = ({ boardString, setRotation }) => {
 const AllRotations = ({ board, setRotation }) => {
   const [rots, setRots] = useState([]);
   const [max, setMax] = useState(null);
+  const [maxColor, setMaxColor] = useState("green");
 
   useEffect(() => {
     // get all rotations of a provided board state
@@ -72,8 +73,20 @@ const AllRotations = ({ board, setRotation }) => {
         if (!!POSITIONS[nextr]) m = POSITIONS[nextr];
       }
     }
+
+    let mc = "green";
+    if (m > 12 && m < 121) {
+      m = m - 12;
+      mc = "blue";
+    } else if (m > 120) {
+      m = m - 120;
+      mc = "pink";
+    }
+    // if max > 120, max = max - 120
+
     setRots(rs);
     setMax(m);
+    setMaxColor(mc);
   }, [board]);
 
   // render each mini board to see all rotations of the given state
@@ -95,7 +108,9 @@ const AllRotations = ({ board, setRotation }) => {
         <div className="rotation-wrap">
           <div className="title">BOX</div>
           <div>
-            <span className="max-value">{max}</span>
+            <span className="max-value" style={{ backgroundColor: maxColor }}>
+              {max}
+            </span>
           </div>
         </div>
       )}
