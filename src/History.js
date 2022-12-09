@@ -14,7 +14,7 @@ games: [
 */
 
 const History = () => {
-  const { games } = useGames();
+  const { games, clearGames } = useGames();
   const height = 1000;
   const width = 2000;
   const margin = { top: 10, bottom: 50, left: 75, right: 0 };
@@ -91,6 +91,7 @@ const History = () => {
     <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <div className="title">History</div>
+        <button onClick={() => clearGames()}>Clear History</button>
       </div>
       <div>
         <svg className={`svg-content`} viewBox={`0 0 ${width} ${height}`}>

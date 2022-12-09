@@ -1,9 +1,17 @@
 import React, { useState } from "react";
 
 const GameContext = React.createContext();
+const STORAGE_KEY = "menace_games";
 
 const GameProvider = ({ children }) => {
-  const [games, setGames] = useState([]);
+  const [games, setGames] = useState(
+    JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]")
+  );
+
+  const clearGames = () => {
+    localStorage.setItem(STORAGE_KEY, "[]");
+    setGames([]);
+  };
 
   const addGame = (game) => {
     let yValueArr = [...games, game];
@@ -12,7 +20,10 @@ const GameProvider = ({ children }) => {
     let losses = yValueArr.filter((f) => f.status === "loss").length;
     let yValue = 3 * wins + draws - losses;
     console.log("new game", { ...game, value: yValue });
-    setGames([...games, { ...game, value: yValue }]);
+
+    let updateGames = [...games, { ...game, value: yValue }];
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(updateGames));
+    setGames(updateGames);
   };
 
   return (
@@ -20,6 +31,7 @@ const GameProvider = ({ children }) => {
       value={{
         addGame,
         games,
+        clearGames,
       }}
     >
       {children}
