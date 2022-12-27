@@ -3,8 +3,8 @@
 }
 
 .app-wrapper {
-  max-width: 1200px;
+  max-width: 100%;
   margin: auto;
-  padding: 25px 0px;
+  padding: 25px;
   display: flex;
 }

@@ -9,9 +9,9 @@ function App() {
       <div className="app-wrapper">
         <div
           style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "100px",
+            display: "grid",
+            gridTemplateColumns: "minmax(0, 500px) minmax(0, 2fr)",
+            gap: "40px",
             width: "100%",
           }}
         >

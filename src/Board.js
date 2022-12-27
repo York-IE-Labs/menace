@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import POSITIONS from "./positions.json";
 import { useGames } from "./GameContext";
-import "./Board.css";
 
 // All rotation operations for any board state
 // I.e. any board state has 8 total representations after rotations and mirrors
@@ -197,18 +196,21 @@ const Board = () => {
             <AllRotations board={boardState} setRotation={setRotation} />
           </div>
         </div>
-        <div style={{ display: "flex", gap: "5px" }}>
+        <div style={{ display: "flex", gap: "5px", justifyContent: "center" }}>
           <button
+            className="button menace-wins"
             onClick={() => addGame({ status: "win", first_move_color: first })}
           >
             MENACE Wins
           </button>
           <button
+            className="button draw"
             onClick={() => addGame({ status: "draw", first_move_color: first })}
           >
             Draw
           </button>
           <button
+            className="button human-wins"
             onClick={() => addGame({ status: "loss", first_move_color: first })}
           >
             Human Wins

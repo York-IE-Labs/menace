@@ -87,6 +87,20 @@ const History = () => {
     // eslint-disable-next-line
   }, [games]);
 
+  const blues = [0, 2, 6, 8];
+  const reds = [1, 3, 5, 7];
+
+  // click position on board to set next value
+  const getBackgroundColor = (position) => {
+    let firstColor = "green";
+    if (blues.includes(position)) {
+      firstColor = "blue";
+    } else if (reds.includes(position)) {
+      firstColor = "red";
+    }
+    return firstColor;
+  };
+
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -113,6 +127,31 @@ const History = () => {
             ))}
           </g>
         </svg>
+      </div>
+      <div
+        style={{
+          padding: "0px 50px",
+          display: "flex",
+          flexDirection: "column",
+          gap: "5px",
+        }}
+      >
+        <div style={{ fontWeight: "500", color: "rgba(0,0,0,.65)" }}>
+          MENACE Start Position
+        </div>
+        <div className={`mini-board`}>
+          {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+            <div key={`position-startingkey-${i}`} className="pos">
+              <div
+                style={{
+                  backgroundColor: getBackgroundColor(i),
+                  opacity: "0.7",
+                  borderRadius: "4px",
+                }}
+              ></div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
