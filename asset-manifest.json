@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/menace/static/css/main.c1bd08ec.css",
-    "main.js": "/menace/static/js/main.a8649500.js",
+    "main.css": "/menace/static/css/main.61978070.css",
+    "main.js": "/menace/static/js/main.f5866fdf.js",
     "index.html": "/menace/index.html",
-    "main.c1bd08ec.css.map": "/menace/static/css/main.c1bd08ec.css.map",
-    "main.a8649500.js.map": "/menace/static/js/main.a8649500.js.map"
+    "main.61978070.css.map": "/menace/static/css/main.61978070.css.map",
+    "main.f5866fdf.js.map": "/menace/static/js/main.f5866fdf.js.map"
   },
   "entrypoints": [
-    "static/css/main.c1bd08ec.css",
-    "static/js/main.a8649500.js"
+    "static/css/main.61978070.css",
+    "static/js/main.f5866fdf.js"
   ]
 }
